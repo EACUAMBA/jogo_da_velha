@@ -9,6 +9,9 @@ package jogo_da_velha.models;
 public class Posicao {
 	private Jogador jogador;
 	
+	public Posicao() {}
+	public Posicao(Jogador jogador) {this.jogador = jogador;}
+	
 	public void setJogador(Jogador jogador) {
 		this.jogador = jogador;
 	}

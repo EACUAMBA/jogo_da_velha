@@ -1,5 +1,6 @@
 package jogo_da_velha.controllers;
 
+import jogo_da_velha.models.ImagemTabuleiro;
 import jogo_da_velha.models.Tabuleiro;;
 
 /*
@@ -8,8 +9,25 @@ import jogo_da_velha.models.Tabuleiro;;
 *
 */
 
-public class JogoDaVelhaController {
+public class JogoDaVelhaController implements IJogoDaVelhaController {
 	private Tabuleiro tabuleiro;
+
+	@Override
+	public ImagemTabuleiro inicializarJogo(String nome1, char simbolo1, String nome2, char simbolo2) {
+		tabuleiro = new Tabuleiro();
+		if (tabuleiro == null)
+			return null;
+		
+		return tabuleiro.inicializarTabuleiro(nome1, simbolo1, nome2, simbolo2);
+	}
+
+	@Override
+	public ImagemTabuleiro posicionarDado(int linha, int coluna) {
+		// TODO Auto-generated method stub
+		
+		return this.tabuleiro.posicionarDado(linha, coluna);
+		
+	}
 	
-	
+
 }

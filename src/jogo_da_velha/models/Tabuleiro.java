@@ -19,9 +19,7 @@ public class Tabuleiro {
 		if(this.jogador1.isMinhaVez()) {
 			this.jogador1.setMinhaVez(false);
 			this.jogador2.setMinhaVez(true);
-		}
-		
-		if(this.jogador2.isMinhaVez()) {
+		}else if(this.jogador2.isMinhaVez()) {
 			this.jogador2.setMinhaVez(false);
 			this.jogador1.setMinhaVez(true);
 		}
@@ -34,9 +32,47 @@ public class Tabuleiro {
 		}
 		
 	}
+	
+	public void colocarDadoNaPosicao(int linha, int coluna) {
+		Jogador jogadorActual = this.pegarJogadorActual();
+		this.posicoes[linha][coluna].setJogador(jogadorActual);
+	}
+	public ImagemTabuleiro posicionarDado(int linha, int coluna) {
+		
+		boolean ocupado = this.verificarDisponibilidadePosicao(linha, coluna);
+		if(!ocupado) {
+			this.colocarDadoNaPosicao(linha, coluna);
+			
+			
+			//Gambiarra - isso não devia ser assim estruturamos mal o codigo!
+			if(this.temPosicoesVazias()) {
+				this.trocarJogadorActual();
+			}else if(this.ouveVencedor()) {
+				this.trocarJogadorActual();
+			}
+			
+			
+			return this.criarImagemTabuleiro();
+			
+		}else {
+			ImagemTabuleiro imagemTabuleiro = this.criarImagemTabuleiro();
+			imagemTabuleiro.setMensagem("\n***** Posição já está ocupada, selecione outra por favor. *****\n" + imagemTabuleiro.getMensagem());
+			return imagemTabuleiro;
+		}
+		
+		
+	}
 	public boolean verificarDisponibilidadePosicao(int linha, int coluna) {
 		boolean ocupado = this.posicoes[linha][coluna].posicaoEstaOcupada();
 		return ocupado;
+	}
+	
+	public void criarPosicoes() {
+		for(int linha = 0; linha < this.posicoes.length; linha++) {
+			for(int coluna=0; coluna< this.posicoes[linha].length; coluna++) {
+				this.posicoes[linha][coluna] = new Posicao();
+			}
+		}
 	}
 	public ImagemTabuleiro inicializarTabuleiro(String nome1, char simbolo1, String nome2, char simbolo2) {
 		this.jogador1 = new JogadorHumano();
@@ -49,6 +85,8 @@ public class Tabuleiro {
 		this.jogador2.setSimbolo(simbolo2);
 		
 		this.jogoTermoniu = false;
+		
+		this.criarPosicoes();
 
 		return this.criarImagemTabuleiro();
 	}
@@ -70,12 +108,12 @@ public class Tabuleiro {
 		}else {
 		String mensagem = "Vez de " + jogadorActual.getNome() + "\nSimbolo: " + jogadorActual.getSimbolo();
 		imagemTabuleiro.setMensagem(mensagem);
-		imagemTabuleiro.setPosicoes(posicoes);
+		imagemTabuleiro.setPosicoes(this.posicoes);
 		}
 		
 		return imagemTabuleiro;
 	}
-	public boolean verificarTemPosicoesVazias() {
+	public boolean temPosicoesVazias() {
 		boolean encontrouPosicaoVazia = false;
 		
 		for(int i = 0; i <= (2); i++) {
