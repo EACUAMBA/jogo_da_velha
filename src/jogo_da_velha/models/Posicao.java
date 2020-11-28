@@ -24,4 +24,15 @@ public class Posicao {
 		}
 		return false;
 	}
+	public boolean temEsteJogador(Jogador jogador) {
+		if(this.jogador != null && jogador != null) {
+			if(jogador.getNome().equals(this.jogador.getNome())) {
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+	}
 }
