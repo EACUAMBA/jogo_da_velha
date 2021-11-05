@@ -17,8 +17,12 @@ public class Posicao {
         this.jogador = jogador;
     }
 
-    public void setJogador(Jogador jogador) {
-        this.jogador = jogador;
+    public boolean posicionarJogador(Jogador jogador) {
+        boolean naoTemJogador =  !this.posicaoEstaOcupada();
+        if(naoTemJogador){
+            this.jogador = jogador;
+        }
+        return naoTemJogador;
     }
 
     public Jogador getJogador() {
@@ -32,5 +36,17 @@ public class Posicao {
 	 */
 	public boolean posicaoEstaOcupada() {
     	return this.jogador != null;
+    }
+
+    /**
+     * Compara duas posições se tem o mosmo jogador nelas
+     * @param o, espero uma instância de Posicao
+     * @return boolean, true se forem iguais e false caso contrario.
+     */
+    public boolean equals(Object o){
+	    if(o != null) return false;
+	    Posicao posicao = o instanceof Posicao ? (Posicao)o : null;
+	    if (posicao == null) return false;
+	    return posicao.jogador.getSimbolo().equals(this.jogador.getSimbolo());
     }
 }
