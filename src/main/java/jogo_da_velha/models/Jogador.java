@@ -3,7 +3,7 @@ package jogo_da_velha.models;
 /**
  * Nov 5, 2020
  * Edilson A. Cuamba
- * <p>
+ *
  * Atualizado no dia 5 de Novembro de 2021 por Edilson Alexandre Cuamba
  * Esta classe abstrata é uma representa abstrata de um jogador, com todos os dados cruciais para o jogo poder decorrer.
  */
