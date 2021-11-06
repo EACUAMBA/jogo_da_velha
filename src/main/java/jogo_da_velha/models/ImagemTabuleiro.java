@@ -13,13 +13,15 @@ public class ImagemTabuleiro {
     private Jogador jogadorActual;
     private Jogador jogadorVencedor;
     private boolean houveVencedor;
+    private boolean houveEmpate;
 
-    public ImagemTabuleiro(String mensagem, Posicao[][] posicoes, Jogador jogadorActual, Jogador jogadorVencedor, boolean houveVencedor) {
+    public ImagemTabuleiro(String mensagem, Posicao[][] posicoes, Jogador jogadorActual, Jogador jogadorVencedor, boolean houveVencedor, boolean houveEmpate) {
         this.mensagem = mensagem;
         this.jogadorActual = jogadorActual;
         this.jogadorVencedor = jogadorVencedor;
         this.posicoes = posicoes;
         this.houveVencedor = houveVencedor;
+        this.houveEmpate = houveEmpate;
     }
 
     public String getMensagem() {
@@ -40,5 +42,9 @@ public class ImagemTabuleiro {
 
     public boolean isHouveVencedor() {
         return houveVencedor;
+    }
+
+    public boolean isHouveEmpate(){
+        return this.houveEmpate;
     }
 }
