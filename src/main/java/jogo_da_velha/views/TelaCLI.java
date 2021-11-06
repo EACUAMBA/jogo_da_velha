@@ -17,14 +17,14 @@ public class TelaCLI {
 
 	public void iniciarJogo() {
 		System.out.println("Bem vindo ao jogo da Velha desenvolvido por Edilson Alexandre Cuamba da Thunder Moz\n"
-				+ "(Empresa de Desenvolvimento de Software Manutenção de Infraestruturas e muito mais).");
+				+ "(Empresa de Desenvolvimento de Software Manutenï¿½ï¿½o de Infraestruturas e muito mais).");
 
 		System.out.println("Menu (lembre-se ao selecionar 0 durante o jogo, ira sair do jogo)\r\n" + "\r\n"
 				+ "1 - Iniciar Jogo;\r\n" + "0 - Sair;");
 		String opcao = "";
 
 		while (!opcao.equals("1") && !opcao.equals("0")) {
-			System.out.print("Insira a sua opção:");
+			System.out.print("Insira a sua opï¿½ï¿½o:");
 			opcao = this.scanner.nextLine();
 		}
 		if (opcao.equals("1")) {
@@ -34,9 +34,9 @@ public class TelaCLI {
 			String nome2 = this.pedirNomeJogador("segundo jogador");
 			char simbolo2 = this.pedirSimbolo(simbolo1, nome2);
 
-			System.out.println("Obrigado, Como só existem duas opções assumimos que o " + nome2 + " usara o simbolo: "
+			System.out.println("Obrigado, Como sï¿½ existem duas opï¿½ï¿½es assumimos que o " + nome2 + " usara o simbolo: "
 					+ simbolo2 + "; que restou!");
-			System.out.printf("%nEntão temos%nJogador 1: %s, com simbolo: %s;", nome1, simbolo1);
+			System.out.printf("%nEntï¿½o temos%nJogador 1: %s, com simbolo: %s;", nome1, simbolo1);
 			System.out.printf("%nJogador 2: %s, com simbolo: %s;%n%n", nome2, simbolo2);
 
 			this.mostrarImagemTabuleiro(this.iJogoDaVelhaController.inicializarJogo(nome1, simbolo1, nome2, simbolo2));
@@ -56,13 +56,13 @@ public class TelaCLI {
 		// Variavel de escape do do-while
 		boolean continuarPedindo = true;
 		do {
-			System.out.print("Insira a posição que deseja jogar:");
+			System.out.print("Insira a opÃ§Ã£o: ");
 			posicao = scanner.nextLine();
-
-			for (int numero = 0; numero <= 10; numero++) {
-				if (posicao.equals(numero + "")) {
-					continuarPedindo = false;
-				}
+			try{
+				Integer posicaoInteger = Integer.parseInt(posicao.trim());
+				continuarPedindo = !(posicaoInteger >= 0 && posicaoInteger <= 10);
+			}catch (Exception exception){
+				System.out.println("\nOpÃ§Ã£o invÃ¡lida!\n");
 			}
 		} while (continuarPedindo);
 
@@ -163,13 +163,39 @@ public class TelaCLI {
 	public void mostrarImagemTabuleiro(ImagemTabuleiro imagemTabuleiro) {
 		System.out.printf("%n%s%n", imagemTabuleiro.getMensagem());
 
-		int contador = 1;
-		for (int l = 0; l < imagemTabuleiro.getPosicoes().length; l++) {
-			String linha = "\n            ";
+		if(imagemTabuleiro.isHouveVencedor()) {
+			System.out.printf("%s %s%n%n", "O vencedor foi ", imagemTabuleiro.getJogadorVencedor().getNome());
+			this.immprimeMatrizPosicoes(imagemTabuleiro.getPosicoes());
+			this.iniciarJogo();
+			return;
+		}
 
-			for (int c = 0; c < imagemTabuleiro.getPosicoes()[l].length; c = c + 1) {
-				if (imagemTabuleiro.getPosicoes()[l][c].posicaoEstaOcupada()) {
-					linha = linha + " " + imagemTabuleiro.getPosicoes()[l][c].getJogador().getSimbolo() + "       ";
+		if(imagemTabuleiro.isHouveEmpate()) {
+			this.iniciarJogo();
+			return;
+		}
+
+
+
+		System.out.printf("%n%s %s%n%s %s", "O jogador actual Ã© ", imagemTabuleiro.getJogadorActual().getNome(), "O seu dado Ã© ", imagemTabuleiro.getJogadorActual().getSimbolo());
+
+		this.immprimeMatrizPosicoes(imagemTabuleiro.getPosicoes());
+
+		System.out.println(
+				"\n\nInsira 10 para reiniciar o jogo.\nInsira 0 para fechar o jogo.\nInsira o nÃºmero: ");
+	}
+
+	private void immprimeMatrizPosicoes(Posicao[][] posicoes) {
+		System.out.println("\nTabuleiro actual!\n");
+
+		int contador = 1;
+		for (int l = 0; l < posicoes.length; l++) {
+			String linha = "";
+			linha = "\n            ";
+
+			for (int c = 0; c < posicoes[l].length; c = c + 1) {
+				if (posicoes[l][c].posicaoEstaOcupada()) {
+					linha = linha + " " + posicoes[l][c].getJogador().getSimbolo() + "       ";
 
 					contador = contador + 1;
 				} else {
@@ -177,14 +203,11 @@ public class TelaCLI {
 					contador = contador + 1;
 				}
 			}
-
 			System.out.print(linha);
 		}
-
-		System.out.println(
-				"\n\nInsira 10 para reiniciar o jogo.\nInsira 0 para fechar o jogo.\nInsira a opção (Digite o número): ");
+		System.out.println();
+		System.out.println();
 	}
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
