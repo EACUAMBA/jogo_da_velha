@@ -39,14 +39,26 @@ public class Posicao {
     }
 
     /**
-     * Compara duas posições se tem o mosmo jogador nelas
+     * Compara duas posições se tem o mesmo jogador nelas
      * @param o, espero uma instância de Posicao
      * @return boolean, true se forem iguais e false caso contrario.
      */
     public boolean equals(Object o){
-	    if(o != null) return false;
+	    if(o == null) return false;
 	    Posicao posicao = o instanceof Posicao ? (Posicao)o : null;
 	    if (posicao == null) return false;
 	    return posicao.jogador.getSimbolo().equals(this.jogador.getSimbolo());
+    }
+
+    /**
+     * Compara duas posições se tem o mosmo jogador nelas
+     * @param posicao, o espero uma instância de Posicao
+     * @param outra, outra espero uma instância de Posicao
+     * @return boolean, true se forem iguais e false caso contrario.
+     */
+    public static boolean equals(Posicao posicao, Posicao outra){
+        if(posicao.jogador == null) return false;
+        if(outra.jogador == null) return false;
+        return posicao.equals(outra);
     }
 }
