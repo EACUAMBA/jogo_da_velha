@@ -1,7 +1,7 @@
-package jogo_da_velha.controllers;
+package jogo_da_velha.controller;
 
-import jogo_da_velha.models.ImagemTabuleiro;
-import jogo_da_velha.models.Tabuleiro;;
+import jogo_da_velha.model.ImagemTabuleiro;
+import jogo_da_velha.model.Tabuleiro;;
 
 /*
 *Nov 5, 2020

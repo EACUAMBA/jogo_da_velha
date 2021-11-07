@@ -1,4 +1,4 @@
-package jogo_da_velha.models;
+package jogo_da_velha.model;
 
 /**
  * Nov 5, 2020
@@ -14,14 +14,16 @@ public class ImagemTabuleiro {
     private Jogador jogadorVencedor;
     private boolean houveVencedor;
     private boolean houveEmpate;
+    private boolean terminou;
 
-    public ImagemTabuleiro(String mensagem, Posicao[][] posicoes, Jogador jogadorActual, Jogador jogadorVencedor, boolean houveVencedor, boolean houveEmpate) {
+    public ImagemTabuleiro(String mensagem, Posicao[][] posicoes, Jogador jogadorActual, Jogador jogadorVencedor, boolean houveVencedor, boolean houveEmpate, boolean terminou) {
         this.mensagem = mensagem;
         this.jogadorActual = jogadorActual;
         this.jogadorVencedor = jogadorVencedor;
         this.posicoes = posicoes;
         this.houveVencedor = houveVencedor;
         this.houveEmpate = houveEmpate;
+        this.terminou = terminou;
     }
 
     public String getMensagem() {
@@ -46,5 +48,9 @@ public class ImagemTabuleiro {
 
     public boolean isHouveEmpate(){
         return this.houveEmpate;
+    }
+
+    public boolean isTerminou(){
+        return this.terminou;
     }
 }

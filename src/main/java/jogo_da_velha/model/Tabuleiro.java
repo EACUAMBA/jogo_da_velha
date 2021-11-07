@@ -1,6 +1,4 @@
-package jogo_da_velha.models;
-
-import java.util.function.ToDoubleBiFunction;
+package jogo_da_velha.model;
 
 /**
  * Nov 5, 2020
@@ -33,7 +31,7 @@ public class Tabuleiro {
      *
      * @return Jogador actual
      */
-    private Jogador obterJogadorActual() {
+    public Jogador obterJogadorActual() {
         if (this.jogador1.isMinhaVez()) {
             return this.jogador1;
         } else {
@@ -178,7 +176,7 @@ public class Tabuleiro {
             }
 
         }
-        return new ImagemTabuleiro(mensagem, posicoes, jogadorActual, jogadorVencedor, houveVencedor, houveEmpate);
+        return new ImagemTabuleiro(mensagem, posicoes, jogadorActual, jogadorVencedor, houveVencedor, houveEmpate, this.terminou);
     }
 
     /**

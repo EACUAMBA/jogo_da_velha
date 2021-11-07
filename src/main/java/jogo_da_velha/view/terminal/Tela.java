@@ -1,13 +1,13 @@
-package jogo_da_velha.views;
+package jogo_da_velha.view.terminal;
 
 import java.util.Scanner;
-import jogo_da_velha.models.*;
-import jogo_da_velha.controllers.*;
+import jogo_da_velha.model.*;
+import jogo_da_velha.controller.*;
 
 //Nov 5, 2020
 //Edilson A. Cuamba
 
-public class TelaCLI {
+public class Tela {
 	private IJogoDaVelhaController iJogoDaVelhaController;
 	private Scanner scanner = new Scanner(System.in);
 
@@ -211,9 +211,9 @@ public class TelaCLI {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		TelaCLI telaCLI = new TelaCLI();
-		telaCLI.setJogoDaVelhaController(new JogoDaVelhaController());
-		telaCLI.iniciarJogo();
+		Tela tela = new Tela();
+		tela.setJogoDaVelhaController(new JogoDaVelhaController());
+		tela.iniciarJogo();
 
 	}
 

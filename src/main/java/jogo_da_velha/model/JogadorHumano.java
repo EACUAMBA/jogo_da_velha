@@ -1,4 +1,4 @@
-package jogo_da_velha.models;
+package jogo_da_velha.model;
 
 /*
 *Nov 5, 2020
